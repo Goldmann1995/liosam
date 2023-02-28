@@ -1,0 +1,24 @@
+<launch>
+
+    <arg name="project" default="lio_sam"/>
+    
+    <!-- Parameters -->
+    <rosparam file="$(find lio_sam)/config/params.yaml" command="load" />	
+    <rosparam command="load" file="$(find lio_sam)/config/general_config.yaml" />
+    <rosparam command="load" file="$(find lio_sam)/config/bbs_config.yaml" />
+    <rosparam command="load" file="$(find lio_sam)/config/fpfh_config.yaml" />
+    <rosparam command="load" file="$(find lio_sam)/config/ransac_config.yaml" />
+    <rosparam command="load" file="$(find lio_sam)/config/teaser_config.yaml"  />
+    <!--- LOAM -->
+    <include file="$(find lio_sam)/launch/include/module_relocolize.launch" />
+
+    <!--- Robot State TF -->
+    <include file="$(find lio_sam)/launch/include/module_robot_state_publisher.launch" />
+
+    <!--- Run Navsat -->
+    <include file="$(find lio_sam)/launch/include/module_navsat.launch" />
+
+    <!--- Run Rviz-->
+    <include file="$(find lio_sam)/launch/include/module_rviz.launch" />
+
+</launch>
